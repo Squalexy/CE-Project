@@ -44,7 +44,7 @@ def main():
     crossover_prob = 0.3
     offset_mutation = 3
     elitism_percentage = 0.1
-    function_name = "Griewangk"
+    function_name = "Ackley"
 
     path = os.getcwd()+"/Plots"
     if "Plots" not in os.listdir():
