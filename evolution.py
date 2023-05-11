@@ -9,7 +9,7 @@ import time
 #Responsible for evolving the population
 
 
-def vectorTwoPointCrossover(individual1, individual2, probability, ind_deviation, function_name):
+def vectorTwoPointCrossover(individual1, individual2, probability, ind_deviation, function_name, lb, ub):
 
 	cut1 = random.randint(1, len(individual1)/2)
 	cut2 = random.randint(cut1+1, len(individual1))
@@ -23,7 +23,7 @@ def vectorTwoPointCrossover(individual1, individual2, probability, ind_deviation
 			else:
 				individual1, individual2  = individual1[:cut2] + individual2[cut2:], individual2[:cut2] + individual1[cut2:]
 	
-	return Individual(individual1, ind_deviation, function_name), Individual(individual2, ind_deviation, function_name)
+	return Individual(individual1, ind_deviation, function_name, [lb,ub] ), Individual(individual2, ind_deviation, function_name, [lb,ub])
 	
 
 # Tournament Selection of size 5. Randomly selects 5 individuals from the population and return the 2 with the best fitness. 
@@ -66,7 +66,7 @@ def evolution(population, number_generations, mutation_prob, offset_mutation, cr
 		#Two point Crossover 
 		for _ in range(0, (len(population)) //2):
 			indiv1, indiv2 = tournamentSelection(population)
-			offspring1, offspring2 = vectorTwoPointCrossover(copy.deepcopy(indiv1.value_arr), copy.deepcopy(indiv2.value_arr) , crossover_prob, (indiv1.deviation + indiv2.deviation) / 2, indiv1.function_name)
+			offspring1, offspring2 = vectorTwoPointCrossover(copy.deepcopy(indiv1.value_arr), copy.deepcopy(indiv2.value_arr) , crossover_prob, (indiv1.deviation + indiv2.deviation) / 2, indiv1.function_name, indiv1.lb, indiv1.ub)
 
 			new_population.append(offspring1)
 			new_population.append(offspring2)

@@ -30,11 +30,12 @@ class Individual:
             self.fitness_function = fitness_function(function_name)
             self.fitness = self.fitness_function(self.value_arr)
 
-        elif(len(index) == 3):
+        elif(len(index) == 4):
 
             self.value_arr = index[0]
             self.deviation = index[1]
             self.function_name = index[2]
+            self.lb, self.ub = index[3][0], index[3][1]
 
             self.new_deviation = self.deviation
             self.fitness_function = fitness_function(self.function_name)
