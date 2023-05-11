@@ -42,7 +42,7 @@ def main():
     number_generations = 20
     mutation_prob = 0.1
     crossover_prob = 0.3
-    offset_mutation = 1.5
+    offset_mutation = 3
     elitism_percentage = 0.1
     function_name = "Griewangk"
 
