@@ -23,6 +23,8 @@ class Individual:
             self.deviation = init_deviation
             self.new_deviation = init_deviation
             self.function_name = function_name
+            self.lb = lb
+            self.ub = ub
 
             #initialize fitness
             self.fitness_function = fitness_function(function_name)
@@ -60,6 +62,9 @@ class Individual:
 
     def mutate_dev(self, offset):
         self.new_deviation = random.gauss(self.new_deviation, offset)
+
+        if self.new_deviation < 0:
+            self.new_deviation = -self.new_deviation
 
         # if self.new_deviation < 0:
         #     self.new_deviation = 0

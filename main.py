@@ -39,12 +39,12 @@ def main():
     n_individuals = 90
     array_length = 40
     init_deviation = 0.5
-    number_generations = 1000
+    number_generations = 20
     mutation_prob = 0.1
     crossover_prob = 0.3
-    offset_mutation = 7
+    offset_mutation = 1.5
     elitism_percentage = 0.1
-    function_name = "Rastrigin"
+    function_name = "Griewangk"
 
     path = os.getcwd()+"/Plots"
     if "Plots" not in os.listdir():
@@ -76,7 +76,6 @@ def main():
     average_value_average_normal = [float(sum(l))/len(l) for l in zip(*average_of_each_run_normal)]
     #Code to plot and save run results
 
-
     plot_all(dir_path, average_value_average_deviation, best_value_average_deviation, global_best_deviation, deviation_average, average_value_average_normal, best_value_average_normal, global_best_normal)
 
     save_best_individual(dir_path, "best_indiv_deviation.txt", global_best_individual_deviation)
@@ -86,7 +85,6 @@ def main():
     save_best_runs(dir_path, "best_runs_normal.txt", best_of_each_run_normal)
     
     
-    #plot_all_box(arr_avg_fitness, arr_avg_best_fitness, arr_best_fitness)
 
 if __name__ == '__main__':
     main()

@@ -41,7 +41,7 @@ def plot_all(path, average_value_average_deviation, best_value_average_deviation
     plt.title('Deviation over generations')
     plt.legend()
     plt.savefig(path + "/deviation_graph.png")
-    plt.show()
+
 
 def plot_all_box(arr_avg_fitness, arr_avg_best_fitness, arr_best_fitness):
     plt.boxplot([arr_avg_fitness, arr_avg_best_fitness, arr_best_fitness])
@@ -49,7 +49,6 @@ def plot_all_box(arr_avg_fitness, arr_avg_best_fitness, arr_best_fitness):
     plt.xlabel('Fitness Category')
     plt.ylabel('Fitness')
     plt.title('Box Plots of Fitness')
-    plt.show()
 
 def countFiles(dir_path):
     count = len(fnmatch.filter(os.listdir(dir_path), '*'))
