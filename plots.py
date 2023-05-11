@@ -67,6 +67,8 @@ def save_best_individual(path, file_name, indiv):
     f.write("array: " + str(indiv.value_arr) + "\n")
     f.write("fitness : " + str(indiv.fitness) + "\n")
     f.write("end_deviation: " + str(indiv.deviation) + "\n")
+    f.write("lb: " + str(indiv.lb) + "\n")
+    f.write("ub: " + str(indiv.ub) + "\n")
     f.close()
     pass
 
