@@ -39,12 +39,12 @@ def main():
     n_individuals = 90
     array_length = 40
     init_deviation = 0.5
-    number_generations = 10000
+    number_generations = 1000
     mutation_prob = 0.1
     crossover_prob = 0.3
-    offset_mutation = 3
+    offset_mutation = 7
     elitism_percentage = 0.1
-    function_name = "Ackley"
+    function_name = "Rastrigin"
 
     path = os.getcwd()+"/Plots"
     if "Plots" not in os.listdir():

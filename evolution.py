@@ -76,7 +76,7 @@ def evolution(population, number_generations, mutation_prob, offset_mutation, cr
 			indiv.mutation(mutation_prob, offset_mutation)
 			fitness = indiv.fitness_function(indiv.value_arr)
 			
-			if fitness < indiv.fitness: 
+			if fitness <= indiv.fitness: 
 				indiv.deviation = indiv.new_deviation
 			
 			indiv.fitness = fitness
