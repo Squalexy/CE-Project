@@ -46,19 +46,22 @@ def main():
     elitism_percentage = 0.1
     function_name = "Griewangk"
 
-    path = os.getcwd()+"/Plots"
-    if "Plots" not in os.listdir():
-        os.mkdir(os.getcwd()+"/Plots")
-    number_of_files = countFiles(path)
-    makeDir(path, number_of_files)
-    dir_path = path + "/" + str(number_of_files)
+    if not os.path.exists("Plots"):
+        os.mkdir("Plots")
+        
+    if not os.path.exists("Plots/experiments"):
+        os.mkdir("Plots/experiments")
+        
+    path = os.getcwd()+"/Plots/experiments/"
+  
+    makeDir(path, str(function_name) + "_" + str(ub))
+    dir_path = path + "/" + str(function_name) + "_" + str(ub)
     makeConfigFile("Config.txt", dir_path, function_name, n_runs, number_generations, array_length, n_individuals, init_deviation, offset_mutation, mutation_prob, crossover_prob)
 
     # [[indiv,indiv,indiv,...],  [indiv,indiv,indiv,...], ...] -> size 30 of tests, size 200 of each population for example
     best_of_each_run_deviation, average_of_each_run_deviation, deviation_of_each_run, global_best_individual_deviation = run_experiments(n_runs, n_individuals, array_length, lb, ub, init_deviation, function_name, number_generations, mutation_prob, offset_mutation, crossover_prob, elitism_percentage)
 
     print(np.size(deviation_of_each_run))
-
 
     global_best_deviation = [float(min(l)) for l in zip(*best_of_each_run_deviation)]
     best_value_average_deviation = [float(sum(l))/len(l) for l in zip(*best_of_each_run_deviation)]
@@ -83,8 +86,6 @@ def main():
 
     save_best_runs(dir_path, "best_runs_deviation.txt", best_of_each_run_deviation)
     save_best_runs(dir_path, "best_runs_normal.txt", best_of_each_run_normal)
-    
-    
 
 if __name__ == '__main__':
     main()
