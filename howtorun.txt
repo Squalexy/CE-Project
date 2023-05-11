@@ -1,0 +1,15 @@
+PACKAGES
+
+numpy
+scipy
+matplotlib
+pandas
+
+HOW TO RUN
+
+1 - Experiences and plots
+Inside the root of the project, run: python main.py
+
+2 - Statistical tests
+Inside the root of the project, run: statistical_test.py
+
