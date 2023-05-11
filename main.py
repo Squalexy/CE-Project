@@ -34,8 +34,8 @@ def run_experiments(n_runs, n_individuals, array_length, lb, ub, init_deviation,
 def main():
 
     n_runs = 30
-    lb = -150
-    ub = 150
+    lb = -5.12
+    ub = 5.12
     n_individuals = 90
     array_length = 40
     init_deviation = 0.5
@@ -44,7 +44,7 @@ def main():
     crossover_prob = 0.3
     offset_mutation = 7
     elitism_percentage = 0.1
-    function_name = "Rastrigin"
+    function_name = "Griewangk"
 
     path = os.getcwd()+"/Plots"
     if "Plots" not in os.listdir():
