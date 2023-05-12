@@ -61,34 +61,39 @@ def box_plot(data, title, vert=True):
         patch.set_facecolor(color)
     plt.savefig(f"Plots/boxplot/boxplot_{title}.png")
     
-def histogram(data,title,xlabel,ylabel, optimization_problem, lb, ub, experiment, bins=25):
-    plt.figure()
-    plt.hist(data,bins=bins)
+""" def histogram(data,title,xlabel,ylabel, optimization_problem, lb, ub, experiment, bins=30):
+    plt.figure(figsize=(10, 6))
+    plt.hist(data, bins=bins, range=(min(data), max(data)))
     plt.title(title)
-    plt.xlabel(ylabel)
-    plt.ylabel(xlabel)
+    plt.xlabel(xlabel)
+    plt.ylabel(ylabel)
+    plt.xticks(range(1, bins+1))
+
     
     plt.text(0.95, 0.95, f"{optimization_problem}\nlb={lb}\nub={ub}", transform=plt.gca().transAxes,
              fontsize=8, fontweight='semibold', color='black', va='top', ha='right')
     plt.savefig("Plots/histogram/experiment"+str(experiment))
     
-def histogram_norm(data,title,xlabel,ylabel,bins=20):
-    plt.hist(data,normed=1,bins=bins)
+def histogram_norm(data,title,xlabel,ylabel,optimization_problem, lb, ub, experiment,bins=20):
+    plt.figure()
+    plt.hist(data,bins=bins)
     plt.title(title)
-    plt.xlabel(ylabel)
-    plt.ylabel(xlabel)
+    plt.xlabel(xlabel)
+    plt.ylabel(ylabel)
     min_,max_,mean_,median_,mode_,var_,std_,*X = describe_data(data)
     x = np.linspace(min_,max_,1000)
     pdf = st.norm.pdf(x,mean_,std_)
+    plt.text(0.95, 0.95, f"{optimization_problem}\nlb={lb}\nub={ub}", transform=plt.gca().transAxes,
+             fontsize=8, fontweight='semibold', color='black', va='top', ha='right')
     plt.plot(x,pdf,'r')    
-    plt.show()
+    plt.savefig("Plots/histogram/experiment"+str(experiment)) """
     
 def main():
     
     number_folders = []
     
     # replace this path with another one
-    path = "Plots\Alexy"
+    path = "Plots/experiments"
     
     if not os.path.exists("Plots/histogram"):
         os.mkdir("Plots/histogram")
@@ -122,30 +127,42 @@ def main():
         datas.append(normal_data)
         datas.append(deviation_data)
         
-        # ---- describe data
-        """ describe_data(deviation_data)
-        describe_data(normal_data) """
+        print("\n--------------------------------")
+        print(f"Optimization problem: {optimization_problem}")
+        print(f"{lb} to {ub}")
         
         # ---- normality test
         shapiro_deviation = test_normal_sw(deviation_data)
         shapiro_normal = test_normal_sw(normal_data)
         print(f"Shapiro deviation: {shapiro_deviation}\nShapiro normal: {shapiro_normal}")
+        
+        if (shapiro_normal[1] > 0.05 and shapiro_deviation[1] > 0.05):
+            print("Normality test passed!\n Proceeding to do Homogeneity of Variance test...\n")
+            stat, p = st.levene(deviation_data, normal_data)
+            print(f"Stat: {stat}\nP-value: {p}\n")
+            if (p > 0.05):
+                print("Homogeneity test passed!\n Since there's interval data and there's independence, we can do a t-test!\n Proceeding to do t-test...\n")
+                t , pval = t_test_ind(deviation_data, normal_data)
+                print('t= %f   p = %s' % (t, pval))
+            else:
+                print("Homogeneity test failed!\n Data is non-parametric!\n Proceeding to do Mann-Whitney test...\n")
+                u, pval = mann_whitney(deviation_data, normal_data)
+                print('u= %f   p = %s' % (u, pval))
+            
+        else:
+            print("Normality test failed!\n Data is non-parametric!\n Proceeding to do Mann-Whitney test...\n")
+            u, pval = mann_whitney(deviation_data, normal_data)
+            print('u= %f   p = %s' % (u, pval))
+            
+        print("--------------------------------\n")
+        
+        """ histogram(deviation_data, "Deviation data", "Num generations", "Fitness", optimization_problem, lb, ub, file_count)
+        histogram(normal_data, "Normal data", "Num generations", "Fitness", optimization_problem, lb, ub, file_count + 1) 
+        file_count += 2"""
     
-        # ---- statistical tests
-        
-        """t , pval = t_test_ind(deviation_data, normal_data)
-        print('t= %f   p = %s' % (t, pval)) """
-        
-        u, pval = mann_whitney(deviation_data, normal_data)
-        print('u= %f   p = %s' % (u, pval))
-        
-        histogram(deviation_data, "Deviation data", "Num generations", "Fitness", optimization_problem, lb, ub, file_count)
-        histogram(normal_data, "Normal data", "Num generations", "Fitness", optimization_problem, lb, ub, file_count + 1)
-        file_count += 2
-    
-    box_plot(datas[0:4], "Rastrigin")
+    box_plot(datas[0:4], "Ackley")
     box_plot(datas[4:8], "Griewangk")
-    box_plot(datas[8:12], "Ackley")
+    box_plot(datas[8:12], "Rastrigin")
         
 if __name__ == "__main__":
     main()

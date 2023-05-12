@@ -7,3 +7,5 @@ initial_deviation: 0.5
 offset_mutation: 3
 mutation probability: 0.1
 crossover probability: 0.3
+lb: -150
+ub: 150

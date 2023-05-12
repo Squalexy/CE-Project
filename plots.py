@@ -68,7 +68,6 @@ def save_best_individual(path, file_name, indiv):
     f.write("lb: " + str(indiv.lb) + "\n")
     f.write("ub: " + str(indiv.ub) + "\n")
     f.close()
-    pass
 
 
 def save_to_CSV(filename, data):
