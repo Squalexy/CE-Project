@@ -160,8 +160,8 @@ def main():
         histogram(normal_data, "Normal data", "Num generations", "Fitness", optimization_problem, lb, ub, file_count + 1) 
         file_count += 2"""
         
-        box_plot(deviation_data, f"{optimization_problem} - {lb} to {ub} (with deviation)")
-        box_plot(normal_data, f"{optimization_problem} - {lb} to {ub} (without deviation)")
+        box_plot(deviation_data, f"{optimization_problem}_{ub}_dev")
+        box_plot(normal_data, f"{optimization_problem}_{ub}_nodev")
     
     
     box_plot(datas[0:4], "Ackley")
