@@ -60,6 +60,7 @@ def box_plot(data, title, vert=True):
     for patch, color in zip(bp['boxes'], colors):
         patch.set_facecolor(color)
     plt.savefig(f"Plots/boxplot/boxplot_{title}.png")
+    plt.close()
     
 """ def histogram(data,title,xlabel,ylabel, optimization_problem, lb, ub, experiment, bins=30):
     plt.figure(figsize=(10, 6))
@@ -162,11 +163,17 @@ def main():
         
         box_plot(deviation_data, f"{optimization_problem}_{ub}_dev")
         box_plot(normal_data, f"{optimization_problem}_{ub}_nodev")
-    
-    
+        
     box_plot(datas[0:4], "Ackley")
     box_plot(datas[4:8], "Griewangk")
     box_plot(datas[8:12], "Rastrigin")
+    
+    box_plot(datas[0:2], "Ackley_5.12")
+    box_plot(datas[2:4], "Ackley_150")
+    box_plot(datas[0:2], "Griewangk_5.12")
+    box_plot(datas[2:4], "Griewangk_150")
+    box_plot(datas[0:2], "Rastrigin_5.12")
+    box_plot(datas[2:4], "Rastrigin_150")
         
 if __name__ == "__main__":
     main()
