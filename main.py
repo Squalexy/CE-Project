@@ -1,4 +1,4 @@
-#Main script to run the project.
+# Main script to run the project.
 import os
 from individuals import create_population
 from evolution import evolution
@@ -30,21 +30,20 @@ def run_experiments(n_runs, n_individuals, array_length, lb, ub, init_deviation,
 
     return best_of_each_run, average_of_each_run, deviation_of_each_run, global_best_individual
 
-
 def main():
 
     n_runs = 30
-    lb = -5.12
-    ub = 5.12
+    lb = -150
+    ub = 150
     n_individuals = 90
     array_length = 40
     init_deviation = 0.5
-    number_generations = 20
+    number_generations = 1000
     mutation_prob = 0.1
     crossover_prob = 0.3
     offset_mutation = 3
     elitism_percentage = 0.1
-    function_name = "Griewangk"
+    function_name = "Ackley"
 
     if not os.path.exists("Plots"):
         os.mkdir("Plots")
@@ -77,8 +76,8 @@ def main():
     global_best_normal = [float(min(l)) for l in zip(*best_of_each_run_normal)]
     best_value_average_normal = [float(sum(l))/len(l) for l in zip(*best_of_each_run_normal)]
     average_value_average_normal = [float(sum(l))/len(l) for l in zip(*average_of_each_run_normal)]
-    #Code to plot and save run results
-
+    
+    #Code to save run results
     plot_all(dir_path, average_value_average_deviation, best_value_average_deviation, global_best_deviation, deviation_average, average_value_average_normal, best_value_average_normal, global_best_normal)
 
     save_best_individual(dir_path, "best_indiv_deviation.txt", global_best_individual_deviation)

@@ -20,7 +20,6 @@ def plot_all(path, average_value_average_deviation, best_value_average_deviation
     plt.legend()
     plt.savefig(path + "/fitness_graph_deviation.png")
     
-
     plt.figure()
     plot_graph(average_value_average_normal, 'red', "Average Fitness")
     plot_graph(best_value_average_normal, 'blue', 'Average Best Fitness')

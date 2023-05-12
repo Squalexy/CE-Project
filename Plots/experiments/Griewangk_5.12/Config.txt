@@ -1,0 +1,9 @@
+Optimization problem: Griewangk
+number runs: 30
+number generations: 1000
+array_size: 40
+number_individuals: 90
+initial_deviation: 0.5
+offset_mutation: 3
+mutation probability: 0.1
+crossover probability: 0.3
