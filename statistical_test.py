@@ -128,6 +128,8 @@ def main():
         datas.append(normal_data)
         datas.append(deviation_data)
         
+        
+        
         print("\n--------------------------------")
         print(f"Optimization problem: {optimization_problem}")
         print(f"{lb} to {ub}")
@@ -161,19 +163,19 @@ def main():
         histogram(normal_data, "Normal data", "Num generations", "Fitness", optimization_problem, lb, ub, file_count + 1) 
         file_count += 2"""
         
-        box_plot(deviation_data, f"{optimization_problem}_{ub}_dev")
-        box_plot(normal_data, f"{optimization_problem}_{ub}_nodev")
+        box_plot(deviation_data, f"{optimization_problem}_{ub}dev")
+        box_plot(normal_data, f"{optimization_problem}_{ub}no_dev")
         
     box_plot(datas[0:4], "Ackley")
     box_plot(datas[4:8], "Griewangk")
     box_plot(datas[8:12], "Rastrigin")
     
-    box_plot(datas[0:2], "Ackley_5.12")
-    box_plot(datas[2:4], "Ackley_150")
-    box_plot(datas[0:2], "Griewangk_5.12")
-    box_plot(datas[2:4], "Griewangk_150")
-    box_plot(datas[0:2], "Rastrigin_5.12")
-    box_plot(datas[2:4], "Rastrigin_150")
+    box_plot(datas[0:2], "Ackley_150")
+    box_plot(datas[2:4], "Ackley_5.12")
+    box_plot(datas[4:6], "Griewangk_150")
+    box_plot(datas[6:8], "Griewangk_5.12")
+    box_plot(datas[8:10], "Rastrigin_150")
+    box_plot(datas[10:12], "Rastrigin_5.12")
         
 if __name__ == "__main__":
     main()
